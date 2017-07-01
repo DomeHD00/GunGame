@@ -28,10 +28,17 @@ public class PlayerDeath implements Listener {
 	}
 
 	@EventHandler
-	public static void joins(PlayerDeathEvent e) {
+	public static void Death(PlayerDeathEvent e) {
+		onDeath(e.getEntity(), e.getEntity().getKiller());
+		
+		e.getDrops().removeAll(e.getDrops());
+		e.setDeathMessage("");
+	}
 
-		if (e.getEntity().getKiller() == null) {
-			Player taget = e.getEntity().getPlayer();
+	public static void onDeath(Player p, Player Killer){
+		
+		if (Killer == null) {
+			Player taget = p;
 			taget.setHealth(20);
 
 
@@ -59,8 +66,7 @@ public class PlayerDeath implements Listener {
 
 				taget.teleport((Location) GunGame.getInstance().getConfig().get("GunGame.world.spawen"));
 			}
-			e.getDrops().removeAll(e.getDrops());
-			e.setDeathMessage("");
+
 			setLevelPlayer.setLevel(taget);
 			Bukkit.getScheduler().runTaskAsynchronously(GunGame.getInstance(), () -> {
 				try {
@@ -78,10 +84,10 @@ public class PlayerDeath implements Listener {
 			return;
 		}
 
-		if (e.getEntity().getKiller() instanceof Player && e.getEntity().getPlayer() instanceof Player) {
+		if (p instanceof Player && Killer instanceof Player) {
 
-			Player killer = e.getEntity().getKiller();
-			Player taget = e.getEntity().getPlayer();
+			Player killer = Killer;
+			Player taget = p;
 
 			int killerInt = GunGame.Level.get(killer) + 1;
 			if (killerInt > 46) {
@@ -119,9 +125,6 @@ public class PlayerDeath implements Listener {
 
 				taget.teleport((Location) GunGame.getInstance().getConfig().get("GunGame.world.spawen"));
 			}
-			e.getDrops().removeAll(e.getDrops());
-			// killer.setHealth(20);
-			e.setDeathMessage("");
 
 			setLevelPlayer.setLevel(killer);
 			killer.playSound(killer.getLocation(), Sound.LEVEL_UP, 1f, 1f);
@@ -165,7 +168,7 @@ public class PlayerDeath implements Listener {
 						ScoreboardManager.updateBoard(taget, ipp);
 
 		}
-
+		
 	}
-
+	
 }

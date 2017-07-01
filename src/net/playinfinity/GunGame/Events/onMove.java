@@ -28,7 +28,8 @@ public class onMove implements Listener{
 		
 		if(loc.add(0, 0, 0).getBlock().getType() == Material.STATIONARY_WATER){
 			if(!GunGame.Builder.contains(p)){
-			 p.setHealth(0);
+			 p.setHealth(20);
+			 PlayerDeath.onDeath(p, null);
 			}
 		}
 		p.setFoodLevel(20);

@@ -71,6 +71,7 @@ public class GunGame extends JavaPlugin{
 		//
 		instance = this;
 		api =  new PlayInfinityAPI("GunGame", "31.172.80.190", "playinfinity", "root", "IUJKHGUJfewiufhweifuhiwehfeugz", "31.172.80.190",  54335);
+	//	api = new PlayInfinityAPI("GunGame", "37.59.7.34", "playinfinity", "root", "OIHIhdiugefw89z4rkfhwiefgklVdhjeufgku478HGFekfgkgfejf", "37.59.7.34",  54335);
 		//
 		//
 		config.setConfig();
